@@ -1,1 +1,9 @@
 # Clarity-L2
+
+This repo takes the LEOS project and breaks it down into 8 modules.
+
+Each successive module builds on the previous one.
+
+The goal is to demonstrate to the reader how a complete Clarity smart contract is created.
+
+A side effect of this is also to help analyze the code for bugs etc.
