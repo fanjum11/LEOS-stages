@@ -1,6 +1,6 @@
 # Clarity-L2
 
-This repo takes the LEOS project and breaks it down into 8 modules.
+This repo takes the LEOS project (https://github.com/fanjum11/leos) and breaks it down into 8 modules.
 
 Each successive module builds on the previous one.
 
