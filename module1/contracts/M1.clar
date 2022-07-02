@@ -49,3 +49,21 @@
 ;; eight module
 ;; get_test_details
 ;; pay_remainder_to_contract_owner
+
+(use-trait edu-token-trait .edu-token-trait.edu-token-trait)
+
+(define-constant ERR_NOT_ENOUGH_STX_TO_MINT_TOKEN (err u1012))
+
+(define-constant stx-per-edu-token u1000) ;;
+
+(define-public (purchase_edu_token (token-trait <edu-token-trait>) (edu_token_amount uint))
+    (let
+        (
+            (required_stx (* stx-per-edu-token edu_token_amount))
+        )
+        (asserts! (>= (stx-get-balance tx-sender) required_stx) ERR_NOT_ENOUGH_STX_TO_MINT_TOKEN)
+        (try! (stx-transfer? required_stx tx-sender (as-contract tx-sender)))
+        (try! (contract-call? token-trait mint edu_token_amount tx-sender))
+        (ok true)
+    )
+)

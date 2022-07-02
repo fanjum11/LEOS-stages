@@ -1,21 +1,32 @@
-
 [project]
-name = "module3"
+name = "module1"
 authors = []
+description = ""
 telemetry = false
-cache_dir = "./.requirements"
+requirements = []
+cache_dir = "/Users/fanjum/Documents/web3/stacks_sc/projects/my_projs/Clarity-L2/module1/./.requirements"
+boot_contracts = ["pox", "costs-v2", "bns"]
+[contracts.M2]
+path = "contracts/M2.clar"
+depends_on = ['edu-token']
 
-# [contracts.counter]
-# path = "contracts/counter.clar"
+[contracts.edu-token]
+path = "contracts/edu-token.clar"
+depends_on = ['edu-token-trait']
+
+[contracts.edu-token-trait]
+path = "contracts/edu-token-trait.clar"
+depends_on = []
+
+[repl]
+costs_version = 2
+parser_version = 2
 
 [repl.analysis]
 passes = ["check_checker"]
-check_checker = { trusted_sender = false, trusted_caller = false, callee_filter = false }
 
-# Check-checker settings:
-# trusted_sender: if true, inputs are trusted after tx_sender has been checked.
-# trusted_caller: if true, inputs are trusted after contract-caller has been checked.
-# callee_filter: if true, untrusted data may be passed into a private function without a
-# warning, if it gets checked inside. This check will also propagate up to the
-# caller.
-# More informations: https://www.hiro.so/blog/new-safety-checks-in-clarinet
+[repl.analysis.check_checker]
+strict = true
+trusted_sender = true
+trusted_caller = true 
+callee_filter = true

@@ -8,6 +8,15 @@ cache_dir = "/Users/fanjum/Documents/web3/stacks_sc/projects/my_projs/Clarity-L2
 boot_contracts = ["pox", "costs-v2", "bns"]
 [contracts.M1]
 path = "contracts/M1.clar"
+depends_on = ['edu-token']
+
+[contracts.edu-token]
+path = "contracts/edu-token.clar"
+depends_on = ['edu-token-trait']
+
+[contracts.edu-token-trait]
+path = "contracts/edu-token-trait.clar"
+depends_on = []
 
 [repl]
 costs_version = 2
@@ -17,7 +26,7 @@ parser_version = 2
 passes = ["check_checker"]
 
 [repl.analysis.check_checker]
-strict = false
-trusted_sender = false
-trusted_caller = false
-callee_filter = false
+strict = true
+trusted_sender = true
+trusted_caller = true 
+callee_filter = true

@@ -1,26 +1,24 @@
+import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v0.31.1/index.ts';
 
-import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v0.31.0/index.ts';
-import { assertEquals } from 'https://deno.land/std@0.90.0/testing/asserts.ts';
+import { assert, assertEquals }from 'https://deno.land/std@0.125.0/testing/asserts.ts';
+
 
 Clarinet.test({
-    name: "Ensure that <...>",
+    name: "Ensure that any creator can buy edu tokens",
     async fn(chain: Chain, accounts: Map<string, Account>) {
-        let block = chain.mineBlock([
-            /* 
-             * Add transactions with: 
-             * Tx.contractCall(...)
-            */
-        ]);
-        assertEquals(block.receipts.length, 0);
-        assertEquals(block.height, 2);
-
-        block = chain.mineBlock([
-            /* 
-             * Add transactions with: 
-             * Tx.contractCall(...)
-            */
-        ]);
-        assertEquals(block.receipts.length, 0);
-        assertEquals(block.height, 3);
+      var deployer = accounts.get("deployer")!;
+      var tokenTrait = `${deployer.address}.edu-token`;
+      var edu_token = 1000; 
+  
+      let block = chain.mineBlock([
+        Tx.contractCall(
+          "M1",
+          "purchase_edu_token",
+          [types.principal(tokenTrait), types.uint(edu_token)],
+          deployer.address
+        ),
+      ]);
+      block.receipts[0].result.expectOk().expectBool(true);
+      assertEquals("(ok true)", block.receipts[0].result);
     },
-});
+  });
