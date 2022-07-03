@@ -8,18 +8,18 @@ The goal is to demonstrate to the reader how a complete Clarity smart contract i
 
 A side effect of this is also to help analyze the code for bugs etc.
 
-#Objective of LEOS
+# Objective of LEOS
 
 
 
-#Division into modules 
+# Division into modules 
 
 
-##Module 1
+## Module 1
 
 
-###Explanation 
+### Explanation 
 
 
-###Open Questions
+### Open Questions
 
